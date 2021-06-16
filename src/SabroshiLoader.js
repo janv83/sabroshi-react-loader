@@ -6,7 +6,7 @@ const {useParams} = rrd;
 
 
 function SabroshiLoader(props) {
-
+/*
     let [runLoaded, setRunLoaded] = useState(false);
     let {sabroshiAvatar} = useParams();
    const router = useRouter();
@@ -62,11 +62,11 @@ function SabroshiLoader(props) {
 
 
       }, []);
-    
+    */
     return (<div id="sabroshiContainer"></div>);
 }
 
-
+/*
 async function initRun(width, height, client)
 {
     const run = new Run({network: "test", trust: "*"});
@@ -113,5 +113,5 @@ async function loadAvatar(runInstance, avatarLoc)
     window.localStorage.sabroshiAvatar = ava.location;  //updating local storage to last known avatar location for faster sync times
     return ava;
 }
-
+*/
 export default SabroshiLoader;

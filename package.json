@@ -1,6 +1,6 @@
 {
   "name": "sabroshi-react-loader",
-  "version": "0.2.9",
+  "version": "0.3.1",
   "description": "handles request from users to have their SabroshiAvatar displayed, loads and displays their profile image, saves imagedata and avatarlocation to local storage.",
   "main": "./lib/SabroshiLoader.js",
   "license": "MIT",
@@ -8,13 +8,11 @@
     "build": "webpack"
   },
   "peerDependencies": {
-    "prop-types": "^15.6.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
     "path": "^0.12.7",
@@ -31,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "sabroshi-react-loader"
+    "url": "https://github.com/janv83/sabroshi-react-loader.git"
   },
   "keywords": [
     "bsv",
