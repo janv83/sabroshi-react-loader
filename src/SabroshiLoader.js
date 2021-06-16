@@ -2,17 +2,16 @@ const r = require('react');
 const  {React, useState, useEffect} = r;
 //const useParams = require('react-router-dom').useParams;
 //const {useParams} = rrd;
-const root = require("window-or-global");
-
 
 function SabroshiLoader(props) {
-
+    let root = props.windowInstance;
+    let document2 = props.documentInstance;
     let [runLoaded, setRunLoaded] = useState(false);
     let {sabroshiAvatar} = props.sabroshiAvatar;//useParams();
-
-    useEffect(() => {
-    if(root.localStorage && typeof document !== "undefined")
+    if(root.localStorage && typeof document2 !== "undefined")
     {
+    useEffect(() => {
+   
    
     
     if(sabroshiAvatar || root.localStorage.sabroshiAvatar)  // user has requested that his avatar should be displayed in your app
@@ -24,23 +23,23 @@ function SabroshiLoader(props) {
                       
 
                 //loading of the webversion of the bsv and run-sdk library
-        const script =  document.createElement('script');
+        const script =  document2.createElement('script');
         script.type="text/javascript";
         script.src = "https://bico.media/2ae5137168cb00d204becebe83bc54af863392bcbc3f0da0340363aa263c6ed1.js";
         script.async = "true";
         script.addEventListener('load',()=>{ console.log("bsvloaded");
         
-        const script2 = document.createElement('script');
+        const script2 = document2.createElement('script');
         script2.type="text/javascript";
         script2.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
         script2.async = "true";
         script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, true).then(()=>{setRunLoaded(true)}); });
 
-        document.body.appendChild(script2);
+        document2.body.appendChild(script2);
 
        });
 
-        document.body.appendChild(script);
+        document2.body.appendChild(script);
 
         
         }
@@ -61,7 +60,7 @@ function SabroshiLoader(props) {
     }
 
 
-      }, []);
+      , []); }
     
     return (<div id="sabroshiContainer"></div>);
 }
@@ -86,7 +85,7 @@ async function initRun(width, height, client)
     imgTag.width = width;
     imgTag.heigh = height;
     }
-    document.getElementById("sabroshiContainer").append(imgTag);
+    document2.getElementById("sabroshiContainer").append(imgTag);
     }
     else
     {
