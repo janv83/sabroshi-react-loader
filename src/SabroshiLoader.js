@@ -1,15 +1,15 @@
 const r = require('react');
 const  {React, useState, useEffect} = r;
-const rrd = require('react-router-dom');
-const {useParams} = rrd;
-//const root = require("window-or-global");
+//const useParams = require('react-router-dom').useParams;
+//const {useParams} = rrd;
+const root = require("window-or-global");
 
 
 function SabroshiLoader(props) {
-/*
+
     let [runLoaded, setRunLoaded] = useState(false);
-    let {sabroshiAvatar} = useParams();
-   const router = useRouter();
+    let {sabroshiAvatar} = props.sabroshiAvatar;//useParams();
+
     useEffect(() => {
     if(window.localStorage && window.document)
     {
@@ -62,11 +62,11 @@ function SabroshiLoader(props) {
 
 
       }, []);
-    */
+    
     return (<div id="sabroshiContainer"></div>);
 }
 
-/*
+
 async function initRun(width, height, client)
 {
     const run = new Run({network: "test", trust: "*"});
@@ -113,5 +113,5 @@ async function loadAvatar(runInstance, avatarLoc)
     window.localStorage.sabroshiAvatar = ava.location;  //updating local storage to last known avatar location for faster sync times
     return ava;
 }
-*/
+
 export default SabroshiLoader;
