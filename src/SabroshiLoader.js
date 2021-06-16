@@ -1,15 +1,14 @@
-const r = require('react');
-const  {React, useState, useEffect} = r;
-//const useParams = require('react-router-dom').useParams;
-//const {useParams} = rrd;
+import React, {useEffect, useState} from 'react';
 
 function SabroshiLoader(props) {
     let root = props.windowInstance;
     let document2 = props.documentInstance;
     let [runLoaded, setRunLoaded] = useState(false);
-    let {sabroshiAvatar} = props.sabroshiAvatar;//useParams();
+    let sabroshiAvatar = props.sabroshiAvatar;//useParams();
+    console.log("sl loaded");
     if(root.localStorage && typeof document2 !== "undefined")
     {
+        console.log("has instances");
     useEffect(() => {
    
    
@@ -18,9 +17,9 @@ function SabroshiLoader(props) {
     {
         if(sabroshiAvatar && sabroshiAvatar !== "disconnect")  
         {
-            root.localStorage.sabroshiAvatar = router.query.sabroshiAvatar;  //saving the avatarlocation of the user in localstorage
+            root.localStorage.sabroshiAvatar = sabroshiAvatar;  //saving the avatarlocation of the user in localstorage
         
-                      
+                    console.log("about to add scripts");  
 
                 //loading of the webversion of the bsv and run-sdk library
         const script =  document2.createElement('script');
@@ -68,6 +67,7 @@ function SabroshiLoader(props) {
 
 async function initRun(width, height, client)
 {
+    console.log("scripts added");
     const run = new Run({network: "test", trust: "*"});
     const cacheRun =new Run.plugins.RunConnect();
     run.cache = cacheRun;
