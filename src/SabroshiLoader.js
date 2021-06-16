@@ -11,7 +11,7 @@ function SabroshiLoader(props) {
     let {sabroshiAvatar} = props.sabroshiAvatar;//useParams();
 
     useEffect(() => {
-    if(root.localStorage && root.document)
+    if(root.localStorage && typeof document !== "undefined")
     {
    
     
@@ -24,23 +24,23 @@ function SabroshiLoader(props) {
                       
 
                 //loading of the webversion of the bsv and run-sdk library
-        const script = root.document.createElement('script');
+        const script =  document.createElement('script');
         script.type="text/javascript";
         script.src = "https://bico.media/2ae5137168cb00d204becebe83bc54af863392bcbc3f0da0340363aa263c6ed1.js";
         script.async = "true";
         script.addEventListener('load',()=>{ console.log("bsvloaded");
         
-        const script = root.document.createElement('script');
-        script.type="text/javascript";
-        script.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
-        script.async = "true";
-        script.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, true).then(()=>{setRunLoaded(true)}); });
+        const script2 = document.createElement('script');
+        script2.type="text/javascript";
+        script2.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
+        script2.async = "true";
+        script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, true).then(()=>{setRunLoaded(true)}); });
 
-        root.document.body.appendChild(script);
+        document.body.appendChild(script2);
 
        });
 
-        root.document.body.appendChild(script);
+        document.body.appendChild(script);
 
         
         }
@@ -86,7 +86,7 @@ async function initRun(width, height, client)
     imgTag.width = width;
     imgTag.heigh = height;
     }
-    root.document.getElementById("sabroshiContainer").append(imgTag);
+    document.getElementById("sabroshiContainer").append(imgTag);
     }
     else
     {
