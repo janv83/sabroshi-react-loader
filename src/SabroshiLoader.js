@@ -68,7 +68,7 @@ function SabroshiLoader(props) {
 async function initRun(width, height, client)
 {
     console.log("scripts added");
-    const run = new Run({network: "test", trust: "*"});
+    const run = new Run({network: "main", trust: "*"});
     const cacheRun =new Run.plugins.RunConnect();
     run.cache = cacheRun;
     run.client = client;
