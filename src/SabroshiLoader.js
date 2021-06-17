@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react';
 
 function SabroshiLoader(props) {
     let [runLoaded, setRunLoaded] = useState(false);
-    let sabroshiAvatar = props.sabroshiAvatar;//useParams();
-    console.log("sl loaded " + sabroshiAvatar);
- 
+    let sabroshiAvatar = props.sabroshiAvatar;
+    
+    
     useEffect(() => {
    
-   
+        
+        sabroshiAvatar = getQueryVariable("sabroshiAvatar");
+        if(!sabroshiAvatar)
+            sabroshiAvatar = props.sabroshiAvatar;
     
     if(sabroshiAvatar || window.localStorage.sabroshiAvatar)  // user has requested that his avatar should be displayed in your app
     {
@@ -15,7 +18,6 @@ function SabroshiLoader(props) {
         {
             window.localStorage.sabroshiAvatar = sabroshiAvatar;  //saving the avatarlocation of the user in localstorage
         
-                    console.log("about to add scripts");  
 
                 //loading of the webversion of the bsv and run-sdk library
         const script =  document.createElement('script');
@@ -61,28 +63,47 @@ function SabroshiLoader(props) {
 }
 
 
+function getQueryVariable(variable)
+{
+        var query = window.location.search.substring(1);
+        console.log(query)//"app=article&act=news_content&aid=160990"
+        var vars = query.split("&");
+        console.log(vars) //[ 'app=article', 'act=news_content', 'aid=160990' ]
+        for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                    console.log(pair)//[ 'app', 'article' ][ 'act', 'news_content' ][ 'aid', '160990' ] 
+        if(pair[0] == variable){return pair[1];}
+         }
+         return(false);
+}
+
+
 async function initRun(width, height, client)
 {
-    console.log("scripts added");
     const run = new Run({network: "main", trust: "*"});
     const cacheRun =new Run.plugins.RunConnect();
+
+    for (const key of Object.keys(precachedData)) {
+        await cacheRun.set(key, precachedData[key])
+     }
+    
+  
     run.cache = cacheRun;
     run.client = client;
     try{
     let ava = await loadAvatar(run, window.localStorage.sabroshiAvatar);
-    console.log("ava: " + ava + " ava.owner: " + ava.owner + " active bro: " + ava.activeSabroshi.owner);
     if(ava && ava.owner === ava.activeSabroshi.owner)
     {
-    let imgTag = new Image();
-    imgTag.src="data:image/png;base64," + ava.activeSabroshi.metadata.image.base64Data;
-    window.localStorage.sabroshiDataURL = imgTag.src; //sets the image data to be used elsewhere in localstorage
-    imgTag.className ="sabroshiPicture";
-    if(width && height)
-    {
-    imgTag.width = width;
-    imgTag.height = height;
-    }
-    document.getElementById("sabroshiContainer").append(imgTag);
+        let imgTag = new Image();
+        imgTag.src="data:image/png;base64," + ava.activeSabroshi.metadata.image.base64Data;
+        window.localStorage.sabroshiDataURL = imgTag.src; //sets the image data to be used elsewhere in localstorage
+        imgTag.className ="sabroshiPicture";
+        if(width && height)
+        {
+        imgTag.width = width;
+        imgTag.height = height;
+        }
+        document.getElementById("sabroshiContainer").append(imgTag);
     }
     else
     {
@@ -91,7 +112,7 @@ async function initRun(width, height, client)
     }
     catch(err)
     {
-        console.log("rune error " + err.message);
+        console.log("run error " + err.message);
         if(err.message.includes("ClientModeError"))
         {
             await initRun(width, height, false);
@@ -105,10 +126,8 @@ async function initRun(width, height, client)
 async function loadAvatar(runInstance, avatarLoc)
 {
     runInstance.activate();
-    console.log("about to load avatar");
     let ava = await runInstance.load(avatarLoc);
     await ava.sync({inner: false});
-    console.log("avaloaded: " + ava.location);
     window.localStorage.sabroshiAvatar = ava.location;  //updating local storage to last known avatar location for faster sync times
     return ava;
 }
