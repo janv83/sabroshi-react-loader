@@ -11,7 +11,7 @@ npm install sabroshi-react-loader
 ```jsx
 import React from 'react'
 
-let SabroshiLoader = require('sabroshi-react-loader').default;
+import SabroshiLoader from 'sabroshi-react-loader';
 
 function Example() {
   return(
