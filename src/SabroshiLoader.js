@@ -17,6 +17,7 @@ function SabroshiLoader(props) {
         if(sabroshiAvatar && sabroshiAvatar !== "disconnect")  
         {
             window.localStorage.sabroshiAvatar = sabroshiAvatar;  //saving the avatarlocation of the user in localstorage
+            window.localStorage.sabroshiDisconnect = false;
         
 
                 //loading of the webversion of the bsv and run-sdk library
