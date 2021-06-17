@@ -28,7 +28,7 @@ function SabroshiLoader(props) {
         script2.type="text/javascript";
         script2.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
         script2.async = "true";
-        script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, true).then(()=>{setRunLoaded(true)}); });
+        script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, false).then(()=>{setRunLoaded(true)}); });
 
         document.body.appendChild(script2);
 
@@ -70,16 +70,17 @@ async function initRun(width, height, client)
     run.client = client;
     try{
     let ava = await loadAvatar(run, window.localStorage.sabroshiAvatar);
+    console.log("ava: " + ava + " ava.owner: " + ava.owner + " active bro: " + ava.activeSabroshi.owner);
     if(ava && ava.owner === ava.activeSabroshi.owner)
     {
     let imgTag = new Image();
     imgTag.src="data:image/png;base64," + ava.activeSabroshi.metadata.image.base64Data;
     window.localStorage.sabroshiDataURL = imgTag.src; //sets the image data to be used elsewhere in localstorage
     imgTag.className ="sabroshiPicture";
-    if(widht && height)
+    if(width && height)
     {
     imgTag.width = width;
-    imgTag.heigh = height;
+    imgTag.height = height;
     }
     document.getElementById("sabroshiContainer").append(imgTag);
     }
