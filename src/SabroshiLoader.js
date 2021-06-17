@@ -82,11 +82,6 @@ async function initRun(width, height, client)
 {
     const run = new Run({network: "main", trust: "*"});
     const cacheRun =new Run.plugins.RunConnect();
-
-    for (const key of Object.keys(precachedData)) {
-        await cacheRun.set(key, precachedData[key])
-     }
-    
   
     run.cache = cacheRun;
     run.client = client;
