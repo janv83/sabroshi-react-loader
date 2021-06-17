@@ -9,7 +9,7 @@ npm install sabroshi-react-loader
 
 ## Usage
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
 let SabroshiLoader = require('sabroshi-react-loader').default;
 
@@ -20,6 +20,7 @@ function Example {
     </div>
     )
 }
+export default Example;
 
 ```
 
