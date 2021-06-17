@@ -25,8 +25,8 @@ export default Example;
 ```
 
 width and height are optional.  
-Edit the css with:
-the created html has a container div with the id="sabroshiContainer"
+Edit the css with:  
+the created html has a container div with the id="sabroshiContainer"  
 and the img added has className="sabroshiPicture"  
 
 
