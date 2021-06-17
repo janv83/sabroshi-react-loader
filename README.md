@@ -1,19 +1,26 @@
 # sabroshi-react-loader
 handles request from users to have their SabroshiAvatar displayed, loads and displays their profile image, saves imagedata and avatarlocation to local storage.
 
-installation:
-```
+## Install
+
+```bash
 npm install sabroshi-react-loader
 ```
 
-import:
-```
-let SabroshiLoader = require('sabroshi-react-loader').default;
-```
+## Usage
+```jsx
+import React, { Component } from 'react'
 
-use where you want the Avatar displayed:
-```
-<SabroshiLoader width={32} height={32} />
+let SabroshiLoader = require('sabroshi-react-loader').default;
+
+function Example {
+  return(
+    <div className="exampleContent">
+        <SabroshiLoader width={32} height={32} />
+    </div>
+    )
+}
+
 ```
 
 width and height are optional.
@@ -29,3 +36,8 @@ if the user decides to no longer want to have his avatar displaye, he sents sabr
 the SabroshiLoader deletes the localStorage entries and adds an entry sabroshiDisconnect = true instead.
 
 If the user reconnects again, the sabroshiDisconnect variable is set to false.
+
+
+## License
+
+MIT © [janv83](https://github.com/janv83)
