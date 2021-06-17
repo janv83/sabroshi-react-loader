@@ -13,7 +13,7 @@ import React from 'react'
 
 let SabroshiLoader = require('sabroshi-react-loader').default;
 
-function Example {
+function Example() {
   return(
     <div className="exampleContent">
         <SabroshiLoader width={32} height={32} />
