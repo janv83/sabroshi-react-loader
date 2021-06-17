@@ -1,12 +1,17 @@
 # sabroshi-react-loader
 handles request from users to have their SabroshiAvatar displayed, loads and displays their profile image, saves imagedata and avatarlocation to local storage.
 
+installation:
 ```
 npm install sabroshi-react-loader
 ```
+
+import:
 ```
 let SabroshiLoader = require('sabroshi-react-loader').default;
 ```
+
+use where you want the Avatar displayed:
 ```
 <SabroshiLoader width={32} height={32} />
 ```
