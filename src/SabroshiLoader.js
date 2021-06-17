@@ -11,76 +11,52 @@ function SabroshiLoader(props) {
         sabroshiAvatar = getQueryVariable("sabroshiAvatar");
         if(!sabroshiAvatar)
             sabroshiAvatar = props.sabroshiAvatar;
-    
-    if(sabroshiAvatar || window.localStorage.sabroshiAvatar)  // user has requested that his avatar should be displayed in your app
-    {
-        if(sabroshiAvatar && sabroshiAvatar !== "disconnect")  
+
+        if(sabroshiAvatar === "disconnect")
         {
-            window.localStorage.sabroshiAvatar = sabroshiAvatar;  //saving the avatarlocation of the user in localstorage
-            window.localStorage.sabroshiDisconnect = false;
-        
-
-                //loading of the webversion of the bsv and run-sdk library
-        const script =  document.createElement('script');
-        script.type="text/javascript";
-        script.src = "https://bico.media/2ae5137168cb00d204becebe83bc54af863392bcbc3f0da0340363aa263c6ed1.js";
-        script.async = "true";
-        script.addEventListener('load',()=>{ console.log("bsvloaded");
-        
-        const script2 = document.createElement('script');
-        script2.type="text/javascript";
-        script2.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
-        script2.async = "true";
-        script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, false).then(()=>{setRunLoaded(true)}); });
-
-        document.body.appendChild(script2);
-
-       });
-
-        document.body.appendChild(script);
-
-        
+            window.localStorage.removeItem("sabroshiAvatar");
+            window.localStorage.removeItem("sabroshiDataURL");
+            window.localStorage.sabroshiDisconnect = true;  //setting disconnect so Apps can  handle cleanup
         }
         else
         {
-                if(sabroshiAvatar === "disconnect")
+            if(sabroshiAvatar || window.localStorage.sabroshiAvatar)  // user has requested that his avatar should be displayed in your app
+            {
+                if(sabroshiAvatar)  
                 {
-                    window.localStorage.removeItem("sabroshiAvatar");
-                    window.localStorage.removeItem("sabroshiDataURL");
-                    window.localStorage.sabroshiDisconnect = true;  //setting disconnect so Apps can  handle cleanup
+                    window.localStorage.sabroshiAvatar = sabroshiAvatar;  //saving the avatarlocation of the user in localstorage
+                    window.localStorage.sabroshiDisconnect = false;
                 }
-                else
-                {
-                               //loading of the webversion of the bsv and run-sdk library
+               
+        
+                        //loading of the webversion of the bsv and run-sdk library
                         const script =  document.createElement('script');
                         script.type="text/javascript";
                         script.src = "https://bico.media/2ae5137168cb00d204becebe83bc54af863392bcbc3f0da0340363aa263c6ed1.js";
                         script.async = "true";
-                        script.addEventListener('load',()=>{ console.log("bsvloaded");
+                        script.addEventListener('load',()=>{ 
+                            console.log("bsvloaded");
                         
-                        const script2 = document.createElement('script');
-                        script2.type="text/javascript";
-                        script2.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
-                        script2.async = "true";
-                        script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, false).then(()=>{setRunLoaded(true)}); });
-
-                        document.body.appendChild(script2);
-
-                    });
-
-                        document.body.appendChild(script);
-
-                }
+                            const script2 = document.createElement('script');
+                            script2.type="text/javascript";
+                            script2.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
+                            script2.async = "true";
+                            script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, false).then(()=>{setRunLoaded(true)}); });
                 
+                            document.body.appendChild(script2);
+                
+                        });
+                
+                        document.body.appendChild(script);
+                
+            }
         }
-    }
+    
+    
     
 
  
-    }
-
-
-      , []); 
+    }, []); 
     
     return (<div id="sabroshiContainer"></div>);
 }
