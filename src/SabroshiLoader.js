@@ -9,6 +9,11 @@ function SabroshiLoader(props) {
    
         
         sabroshiAvatar = getQueryVariable("sabroshiAvatar");
+        let display = props.display;
+        if(props.display === null || props.display === "" || typeof props.display === "undefined")
+        {
+            display = true;
+        }
         if(!sabroshiAvatar)
             sabroshiAvatar = props.sabroshiAvatar;
 
@@ -41,7 +46,7 @@ function SabroshiLoader(props) {
                             script2.type="text/javascript";
                             script2.src = "https://bico.media/7429a95bf9f7d1b9bebd05031f7bd32aa2f00e97e01271ec182294f1cdb65642.js";
                             script2.async = "true";
-                            script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, false).then(()=>{setRunLoaded(true)}); });
+                            script2.addEventListener('load',()=>{console.log("runloaded"); initRun(props.width, props.height, false, display).then(()=>{setRunLoaded(true)}); });
                 
                             document.body.appendChild(script2);
                 
@@ -77,7 +82,7 @@ function getQueryVariable(variable)
 }
 
 
-async function initRun(width, height, client)
+async function initRun(width, height, client, display)
 {
     const run = new Run({network: "main", trust: "*"});
     const cacheRun =new Run.plugins.RunConnect();
@@ -89,15 +94,20 @@ async function initRun(width, height, client)
     if(ava && ava.owner === ava.activeSabroshi.owner)
     {
         let imgTag = new Image();
-        imgTag.src="data:image/png;base64," + ava.activeSabroshi.metadata.image.base64Data;
-        window.localStorage.sabroshiDataURL = imgTag.src; //sets the image data to be used elsewhere in localstorage
-        imgTag.className ="sabroshiPicture";
-        if(width && height)
+        let imgData = "data:image/png;base64," + ava.activeSabroshi.metadata.image.base64Data;
+        window.localStorage.sabroshiDataURL = imgData; //sets the image data to be used elsewhere in localstorage
+        if(display)
         {
-        imgTag.width = width;
-        imgTag.height = height;
+            imgTag.src= imgData;
+            
+            imgTag.className ="sabroshiPicture";
+            if(width && height)
+            {
+            imgTag.width = width;
+            imgTag.height = height;
+            }
+            document.getElementById("sabroshiContainer").append(imgTag);
         }
-        document.getElementById("sabroshiContainer").append(imgTag);
     }
     else
     {
