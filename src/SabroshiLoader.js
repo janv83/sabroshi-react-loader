@@ -119,7 +119,7 @@ async function initRun(width, height, client, display)
         console.log("run error " + err.message);
         if(err.message.includes("ClientModeError"))
         {
-            await initRun(width, height, false);
+            await initRun(width, height, false, display);
         }
     }
 
