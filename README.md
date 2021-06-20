@@ -34,7 +34,9 @@ If the user requested to have his Avatar displayed (using getParamter sabroshiAv
 the following localStorage entries are created:  
 
 -sabroshiAvatar  (the avatar run location)  
--sabroshiDataURL  (img data of the pic that should be displayed, can be used as src of img tags or saved into the db entry of your user where appropiate)  
+-sabroshiDataURL  (img data of the pic that should be displayed, can be used as src of img tags or saved into the db entry of your user where appropiate)    
+   
+If you add display=false as the props (i.e. <SabroshiLoader width={32} height={32} display={false}>) the component will not the picutre directly but put the img data into the localstorage variable sabroshiDataURL for you to use elsewhere.
 
 if the user decides to no longer want to have his avatar displaye, he sents sabroshiAvatar=disconnect,   
 the SabroshiLoader deletes the localStorage entries and adds an entry sabroshiDisconnect = true instead.  
