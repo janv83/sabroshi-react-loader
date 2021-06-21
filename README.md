@@ -35,6 +35,10 @@ the following localStorage entries are created:
 
 -sabroshiAvatar  (the avatar run location)  
 -sabroshiDataURL  (img data of the pic that should be displayed, can be used as src of img tags or saved into the db entry of your user where appropiate)    
+-sabroshiName  (a name the user has chosen, null if he did choose a name)
+-sabroshiBio (a short text with more informations about the user, null if he did not change the bio)  
+  
+You can choose to use this data on your homepage / in your app or not.  
    
 If you add display=false as the props (i.e. <SabroshiLoader width={32} height={32} display={false}>) the component will not the picutre directly but put the img data into the localstorage variable sabroshiDataURL for you to use elsewhere.
 
