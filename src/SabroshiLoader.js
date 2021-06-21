@@ -21,6 +21,8 @@ function SabroshiLoader(props) {
         {
             window.localStorage.removeItem("sabroshiAvatar");
             window.localStorage.removeItem("sabroshiDataURL");
+            window.localStorage.removeItem('sabroshiName');
+            window.localStorage.removeItem('sabroshiBio');
             window.localStorage.sabroshiDisconnect = true;  //setting disconnect so Apps can  handle cleanup
         }
         else
@@ -96,6 +98,8 @@ async function initRun(width, height, client, display)
         let imgTag = new Image();
         let imgData = "data:image/png;base64," + ava.activeSabroshi.metadata.image.base64Data;
         window.localStorage.sabroshiDataURL = imgData; //sets the image data to be used elsewhere in localstorage
+        window.localStorage.sabroshiName = ava.name;
+        window.localStorage.sabroshiBio = ava.bio;
         if(display)
         {
             imgTag.src= imgData;
