@@ -37,7 +37,7 @@ the following localStorage entries are created:
 -sabroshiDataURL  (img data of the pic that should be displayed, can be used as src of img tags or saved into the db entry of your user where appropiate)    
 -sabroshiName  (a name the user has chosen, null if he did choose a name)  
 -sabroshiBio (a short text with more informations about the user, null if he did not change the bio)  
--sabroshi ( an object with the attributes of the currently equipped sabroshi: description(name), dataURL, rarity, background, gender, series, eyes, complexion, mask, mouth, nose, hat, hair, brow)
+-currentSabroshi ( an object with the attributes of the currently equipped sabroshi: description(name), dataURL, rarity, background, gender, series, eyes, complexion, mask, mouth, nose, hat, hair, brow), the sabroshi Ojbect has to be loaded with JSON.parse(window.localStorage.currentSabroshi) to access it as a javascript object.)   
             
   
 You can choose to use this data on your homepage / in your app or not.  
