@@ -1010,7 +1010,7 @@ async function initRun(width, height, client, display)
         if(bropheus && bropheus.setup)
         {
             let sabroshi = {description: bropheus.description, dataURL: bropheus.dataURL,  background: bropheus.background, gender: bropheus.gender, series: bropheus.series, rarity: bropheus.rarity,eyes: bropheus.eyes, complexion: bropheus.complexion, mask: bropheus.mask, mouth: bropheus.mouth, nose: bropheus.nose, hat: bropheus.hat, hair: bropheus.hair, brow: ava.activeSabroshi.bropheus.brow}
-            window.localStorage.currentSabroshi = sabroshi;
+            window.localStorage.currentSabroshi = JSON.stringify(sabroshi);
             let imgData = bropheus.dataURL;
             window.localStorage.sabroshiDataURL = imgData; //sets the image data to be used elsewhere in localstorage
         
