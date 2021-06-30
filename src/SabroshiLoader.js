@@ -1003,21 +1003,29 @@ async function initRun(width, height, client, display)
     if(ava && ava.owner === ava.activeSabroshi.owner)
     {
         let imgTag = new Image();
-        let imgData =  ava.activeSabroshi.bropheus.dataURL;
-        window.localStorage.sabroshiDataURL = imgData; //sets the image data to be used elsewhere in localstorage
+        
         window.localStorage.sabroshiName = ava.name;
         window.localStorage.sabroshiBio = ava.bio;
-        if(display)
+        let bropheus = ava.activeSabroshi.bropheus;
+        if(bropheus && bropheus.setup)
         {
-            imgTag.src= imgData;
-            
-            imgTag.className ="sabroshiPicture";
-            if(width && height)
+            let sabroshi = {description: bropheus.description, dataURL: bropheus.dataURL,  background: bropheus.background, gender: bropheus.gender, series: bropheus.series, rarity: bropheus.rarity,eyes: bropheus.eyes, complexion: bropheus.complexion, mask: bropheus.mask, mouth: bropheus.mouth, nose: bropheus.nose, hat: bropheus.hat, hair: bropheus.hair, brow: ava.activeSabroshi.bropheus.brow}
+            window.localStorage.currentSabroshi = sabroshi;
+            let imgData = bropheus.dataURL;
+            window.localStorage.sabroshiDataURL = imgData; //sets the image data to be used elsewhere in localstorage
+        
+            if(display)
             {
-            imgTag.width = width;
-            imgTag.height = height;
+                imgTag.src= imgData;
+                
+                imgTag.className ="sabroshiPicture";
+                if(width && height)
+                {
+                imgTag.width = width;
+                imgTag.height = height;
+                }
+                document.getElementById("sabroshiContainer").append(imgTag);
             }
-            document.getElementById("sabroshiContainer").append(imgTag);
         }
     }
     else
@@ -1042,7 +1050,7 @@ async function loadAvatar(runInstance, avatarLoc)
 {
     runInstance.activate();
     let ava = await runInstance.load(avatarLoc);
-    await ava.sync({inner: false});
+    await ava.sync();
     window.localStorage.sabroshiAvatar = ava.location;  //updating local storage to last known avatar location for faster sync times
     return ava;
 }
